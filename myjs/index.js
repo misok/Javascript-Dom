@@ -1,3 +1,26 @@
+function insertAfter(newElement,targetElement){
+    var parent = targetElement.parentNode;
+    if(targetElement == parent.lastChild){
+        parent.appendChild(newElement);
+    }else{
+        parent.insertBefore(newElement,targetElement.nextSibling);
+    }
+}
+function preparePlacehoder(){
+    if(!document.createElement) return false;
+    if(!document.createTextNode) return false;
+    var placehoder = document.createElement("img");
+    placehoder.setAttribute("id","placehoder");
+    placehoder.setAttribute("src","images/IMG_0664.JPG");
+    placehoder.setAttribute("alt","My placehoder image");
+    var description = document.createElement("p");
+    description.setAttribute("id","description");
+    var desctext = document.createTextNode("Choose an image");
+    description.appendChild(desctext);
+    var gallery = document.getElementById("imagegallery");
+    insertAfter(placehoder,gallery);
+    insertAfter(description,placehoder);
+}
 function showPic (whichPic){
     if(!document.getElementById("placehoder")) return false;
     var source = whichPic.getAttribute("href");
@@ -33,6 +56,7 @@ function prepareGallery(){
 }
 
 window.onload = function(){
+    preparePlacehoder();
     prepareGallery();
-    countBodyChildren();
+    //countBodyChildren();
 }
